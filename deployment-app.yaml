@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo
+  labels:
+    app: todo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+      - name: todo
+        image: todo-app:latest
+        imagePullPolicy: Never
+        env:
+          - name: DB
+            value: mongodb://db
+          - name: PORT
+            value: '8080'
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: todo-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: todo
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
