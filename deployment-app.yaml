@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: Never
         env:
           - name: DB
-            value: mongodb://db
+            value: 'mongodb://mongo/todo'
           - name: PORT
             value: '8080'
         ports:
