@@ -25,10 +25,6 @@ spec:
             value: '8080'
         ports:
         - containerPort: 8080
-      initContainers:
-      - name: wait-for-mongo
-        image: busybox
-        command: ['sh', '-c', 'until nslookup mongo; do echo waiting for mongo; sleep 2; done;']
 ---
 kind: Service
 apiVersion: v1
